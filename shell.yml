@@ -4,13 +4,13 @@
   gather_facts: false
 
   
-  vars_prompt:    
-    - name: "pat"
-      prompt: "Put the path(e.g. /opt/ohs or any or enter)?"
-      private: no  
-    - name: "shellexec"
-      prompt: "Shell CMD(e.g. systemctl status docker or any)?"
-      private: no  
+#  vars_prompt:    
+#    - name: "pat"
+#      prompt: "Put the path(e.g. /opt/ohs or any or enter)?"
+#      private: no  
+#    - name: "shellexec"
+#      prompt: "Shell CMD(e.g. systemctl status docker or any)?"
+#      private: no  
    
   roles:
     - shell
