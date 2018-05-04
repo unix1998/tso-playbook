@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  
+  vars_prompt:  
+    - name: "path"
+      prompt: "Path (e.g. /etc or /etc/foo.conf [mandatory]?"
+      private: no  
+    - name: "owner"
+      prompt: "User name (e.g. user1 or enter)?"
+      private: no  
+    - name: "group"
+      prompt: "Group name (e.g. linuxgroup or enter)?"
+      private: no  
+    - name: "recurse"
+      prompt: "Recursive yes/no* or enter?"
+      private: no  
+      default: "no"
+    - name: "option"
+      prompt: "Other params or enter?"
+      private: no  
+     
+  roles:
+    - chown

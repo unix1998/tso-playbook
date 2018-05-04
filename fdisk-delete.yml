@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+  
+
+  vars_prompt:  
+    - name: "pvname"
+      prompt: "What is the physical volume(sdb or vdb) to delete?"
+      private: no  
+    - name: "partition"
+      prompt: "What is the partition number to delete?"
+      private: no  
+
+  roles:
+    - fdisk-delete

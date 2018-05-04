@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "lvpath"
+      prompt: "What is the logical to extend (e.g. /dev/vg1/lv1)?"
+      private: no  
+    - name: "size"
+      prompt: "What is the size(5G or +1G or +100%FREE or enter)?"
+      private: no        
+    - name: "pvlist"
+      prompt: "Put the physical volumes (e.g. /dev/sdb1 or enter)?"
+      private: no     
+      default: ""       
+       
+  roles:
+    - lvextend

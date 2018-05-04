@@ -1,0 +1,41 @@
+---
+
+- name: vgdisplay {{ vgname }}
+  shell: vgdisplay {{ vgname }}
+  ignore_errors: yes
+  register: result1
+
+#- debug: var=result1 
+
+- block:
+    - name: Check if vgname exist
+      debug:
+        msg: "***Error*** vgname {{ vgname }} not exist! Nothing to do."
+    - meta: end_play
+  when: result1.failed
+  
+- name: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  shell: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  ignore_errors: yes
+  register: result2
+
+#- debug: var=result2 
+
+- block:
+    - name: Check if lvname exist
+      debug:
+        msg: "***Error*** lvname {{ lvname }} not exist! Nothing to do."
+    - meta: end_play
+  when: result2.failed
+
+- name: lvcreate snapshot
+  lvol:
+    vg: "{{ vgname }}"
+    lv: "{{ lvname }}"
+    size: "{{ size }}"
+    snapshot: "{{ snapname }}"
+
+- shell: lvdisplay /dev/{{ vgname }}/{{ snapname }}
+  register: out
+  
+- debug: var=out.stdout_lines 

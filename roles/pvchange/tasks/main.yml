@@ -1,0 +1,7 @@
+---
+
+- name: pvchange 
+  shell: pvchange -x {{ allocate }} {{ pvlist }}
+  register: out
+
+- debug: var=out.stdout_lines  

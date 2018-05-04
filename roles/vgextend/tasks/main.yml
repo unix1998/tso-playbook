@@ -1,0 +1,10 @@
+---
+
+- name: vgextend {{ vgname }} {{ pvlist }}
+  shell: vgextend {{ vgname }} {{ pvlist }}
+
+- name: pvscan 
+  shell: pvscan
+  register: out
+
+- debug: var=out.stdout_lines  

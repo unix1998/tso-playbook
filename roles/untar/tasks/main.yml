@@ -1,0 +1,9 @@
+---
+
+- name: copy file
+  unarchive:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+  register: out
+
+- debug: var=out

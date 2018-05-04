@@ -1,0 +1,54 @@
+---
+users:
+  - john
+  - rey
+  - alex
+  - shermy
+
+password1: "{{ 'Abcd123' | password_hash('sha512') }}"
+
+line1: "10.193.176.5 saedev01 rus_sae_app_svc_01 sdcgigdcapmdw01"
+line2: "10.193.176.6 saedev02 rus_sae_app_svc_02 sdcgigdcapmdw02"
+line3: "10.77.30.50 rus_any_ldap_bal_01"
+line4: "10.193.176.5 ldapdev01 rus_ldap_app_svc_01"
+line5: "10.193.176.6 ldapdev02 rus_ldap_app_svc_02"
+
+userfull: "John Doe"
+username: john
+sx: male
+
+colours:
+    - name: Blue
+      things:
+        - Sky
+        - Sea
+        - Jeans
+    - name: Yellow
+      things:
+        - Egg yolk
+        - Taxi
+        - Banana
+        - Lemon
+        - Sun
+    - name: Orange
+      things:
+        - Pumpkin
+        - Basketball
+        - Carrots
+        - Oranges
+
+people:
+  - name: Mike
+    fav_colour: Blue
+  - name: Kyle
+    fav_colour: Yellow
+  - name: Shea
+    fav_colour: Blue
+  - name: Aly
+    fav_colour: Yellow
+  - name: Daniyal
+    fav_colour: Yellow
+  - name: Tim
+    fav_colour: Orange
+
+ansible_become_pass: thuyAkac4S6uhAsPuSw2

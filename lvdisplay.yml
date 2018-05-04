@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "pvlist"
+      prompt: "Put the logical volumes separated by comma(/dev/centos/home /dev/centos/root or enter)?"
+      private: no     
+      default: ""              
+
+  roles:
+    - lvdisplay

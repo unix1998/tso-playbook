@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  
+  vars_prompt:
+
+    - name: "gname"
+      prompt: "What is the groupname to delete?"
+      private: no  
+      
+  roles:
+    - groupdeletion

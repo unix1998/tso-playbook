@@ -1,0 +1,17 @@
+---
+
+- name: Change the type to LVM for partition =1
+  shell: (echo t; echo {{ ptype }}; echo w) | fdisk /dev/{{ pvname }}
+  ignore_errors: true
+  when: partition == "1"
+
+- name: Change the type to LVM for partition >1
+  shell: (echo t; echo {{ partition }}; echo {{ ptype }}; echo w) | fdisk /dev/{{ pvname }}
+  ignore_errors: true
+  when: not(partition == "1")
+
+- name: pv list
+  shell: fdisk -l | grep /dev/{{ pvname }}
+  register: out
+
+- debug: var=out.stdout_lines

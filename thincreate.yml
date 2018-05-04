@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(mandatory)?"
+      private: no  
+    - name: "lvname"
+      prompt: "What is the lvname(or enter)?"
+      private: no  
+    - name: "thin"
+      prompt: "What is the thinpool name(mandatory)?"
+      private: no  
+    - name: "size"
+      prompt: "What is the size(100m or 1g or +100%FREE [mandatory])?"
+      private: no        
+       
+  roles:
+    - thincreate

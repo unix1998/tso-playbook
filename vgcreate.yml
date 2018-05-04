@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(mandatory)?"
+      private: no  
+    - name: "pvlist"
+      prompt: "Put the physical volumes separated by comma(e.g. /dev/sdb1 or /dev/sdb)?"
+      private: no     
+      default: ""       
+    - name: "pesize"
+      prompt: "Physical Extent size in MB(default 4 or enter)?"
+      private: no 
+      default: "4"
+    - name: "force"
+      prompt: "Force(yes/no*)?"
+      private: no 
+      default: "no"
+    - name: "pvoption"
+      prompt: "pvoption(or enter)?"
+      private: no 
+      default: ""
+    - name: "vgoption"
+      prompt: "vgoption(or enter)?"
+      private: no
+      default: "" 
+       
+
+  roles:
+    - vgcreate

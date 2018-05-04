@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:
+
+    - name: "src"
+      prompt: "Source file path(local)?"
+      private: no
+    - name: "dest"
+      prompt: "Destination file path(remote)?"
+      private: no
+    - name: "ohner"
+      prompt: "Owner name or enter=inherit?"
+      private: no      
+    - name: "porse"
+      prompt: "Force (yes/no*)?"
+      private: no
+      default: "no"
+  
+  roles:
+    - copyfile

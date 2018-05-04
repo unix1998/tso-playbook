@@ -1,0 +1,6 @@
+---
+- name: Deleting the group.
+  group:
+    name: "{{ gname }}"
+    state: absent
+    

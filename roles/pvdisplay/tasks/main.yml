@@ -1,0 +1,33 @@
+---
+
+- name: pvdisplay
+  shell: pvdisplay
+  register: out
+  when: pvlist == "" and option == ""
+
+- debug: var=out.stdout_lines  
+  when: pvlist == "" and option == ""
+
+- name: pvdisplay {{ option }}
+  shell: pvdisplay {{ option }}
+  register: out
+  when: pvlist == "" and not(option == "")
+
+- debug: var=out.stdout_lines  
+  when: pvlist == "" and not(option == "")  
+
+- name: pvdisplay {{ pvlist }}
+  shell: pvdisplay {{ pvlist }}
+  register: out
+  when: not (pvlist == "") and option == ""
+
+- debug: var=out.stdout_lines  
+  when: not (pvlist == "") and option == ""
+
+- name: pvdisplay {{ option }} {{ pvlist }}
+  shell: pvdisplay {{ option }} {{ pvlist }}
+  register: out
+  when: not (pvlist == "") and not(option == "")
+
+- debug: var=out.stdout_lines  
+  when: not (pvlist == "") and not(option == "")

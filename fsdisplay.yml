@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false       
+
+  vars_prompt:  
+    - name: "fsname"
+      prompt: "Filesystem name(e.g. /vol1 or /vol1/stor1 or enter)?"
+      private: no        
+
+  roles:
+    - fsdisplay

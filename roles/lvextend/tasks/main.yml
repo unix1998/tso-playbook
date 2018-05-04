@@ -1,0 +1,19 @@
+---
+
+- name: lvextend {{ lvpath }} {{ pvlist }}
+  shell: lvextend {{ lvpath }} {{ pvlist }}
+  when: size == ""
+
+- name: lvextend {{ size }} {{ lvpath }} 
+  shell: lvextend {{ size }} {{ lvpath }} 
+  when: not(size == "")
+
+- name: resize2fs {{ lvpath }}
+  shell: resize2fs {{ lvpath }}
+  ignore_errors: true
+
+- name: lvdisplay {{ lvpath }}
+  shell: lvdisplay {{ lvpath }}
+  register: out
+
+- debug: var=out.stdout_lines  

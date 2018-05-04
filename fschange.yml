@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false       
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(mandatory)?"
+      private: no        
+    - name: "lvname"
+      prompt: "What is the lvname(mandatory)?"
+      private: no  
+    - name: "fst"
+      prompt: "What is the fstype(ext4*/xfs)?"
+      private: no  
+      default: "ext4"
+    - name: "resize"
+      prompt: "Resize fs(yes/no*)?"
+      private: no  
+      default: "no"                  
+    - name: "force"
+      prompt: "Force (yes/no*)?"
+      private: no  
+      default: "no"         
+    - name: "option"
+      prompt: "What is the option(or enter)?" 
+      private: no  
+
+  roles:
+    - fschange

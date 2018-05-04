@@ -1,0 +1,7 @@
+---
+
+ - name: Install Tree
+   yum: name={{ software }} state=present
+   register: out
+    
+ - debug: var=out.results 

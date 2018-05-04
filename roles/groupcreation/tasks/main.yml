@@ -1,0 +1,6 @@
+- name: Creating the group.
+  group:
+    name: "{{ gname }}"
+    gid:  "{{ groupid }}"
+    state: present
+    

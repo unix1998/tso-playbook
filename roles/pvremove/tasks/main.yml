@@ -1,0 +1,7 @@
+---
+
+- name: pvremove
+  shell: pvremove {{ pvlist }}
+  register: out
+
+- debug: var=out.stdout_lines  

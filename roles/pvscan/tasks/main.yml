@@ -1,0 +1,7 @@
+---
+
+- name: pvscan
+  shell: pvscan
+  register: out
+
+- debug: var=out.stdout_lines  

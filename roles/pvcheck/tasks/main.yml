@@ -1,0 +1,24 @@
+---
+
+- name: fdisk list {{ pvlist }}
+  shell: fdisk -l | grep {{ pvlist }}
+  ignore_errors: yes
+  register: out1
+
+- block:
+    - name: Check if fdisk exist
+      debug:
+        msg: "***Error*** fdisk list {{ pvlist }} not exist! Nothing to do."
+    - meta: end_play
+  when: out1.failed or pvlist == ""
+
+- name: Checking LVM metadata consistency
+  shell: pvck -v {{ pvlist }}
+  ignore_errors: yes
+  register: out2
+  
+- debug: var=out2.stdout_lines 
+
+- debug: 
+    msg: "***PV is missing but exist in FDISK.  Only solution is to REBOOT the server and create with option FORCE on PV/VG/LV.***"
+  when: out2.stderr.find('Could not find LVM label') != -1 or out2.stderr.find(' Failed to find physical volume') != -1

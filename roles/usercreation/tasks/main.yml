@@ -1,0 +1,143 @@
+---
+
+- name: Creating the user 1
+  user:
+    name: "{{ uname }}"
+    home: /home/{{ uname }}
+    shell: /bin/bash
+  when: uid == "" and group == "" and home == "" and comment == "" and shell == "/bin/bash" 
+  
+- name: Creating the user 2
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    home: /home/{{ uname }}
+    shell: /bin/bash
+  when: not(uid == "") and group == "" and home == "" and comment == "" and shell == "/bin/bash"   
+
+- name: Creating the user 3
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group }}"
+    home: /home/{{ uname }}
+    shell: /bin/bash
+  when: not(uid == "") and not(group == "") and home == "" and comment == "" and shell == "/bin/bash"  
+
+- name: Creating the user 4
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    home: "{{ home }}"
+    shell: /bin/bash
+  when: not(uid == "") and group == "" and not(home == "") and comment == "" and shell == "/bin/bash"    
+
+- name: Creating the user 5
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    home: /home/{{ uname }}
+    comment: "{{ comment }}"
+    shell: /bin/bash
+  when: not(uid == "") and group == "" and home == "" and not(comment == "") and shell == "/bin/bash"    
+
+- name: Creating the user 6
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group }}"
+    home: "{{ home }}"
+    shell: /bin/bash
+  when: not(uid == "") and not(group == "") and not(home == "") and comment == "" and shell == "/bin/bash" 
+
+- name: Creating the user 7
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group }}"
+    home: "{{ home }}"
+    comment: "{{ comment }}"
+    shell: /bin/bash
+  when: not(uid == "") and not(group == "") and not(home == "") and not(comment == "") and shell == "/bin/bash" 
+
+- name: Creating the user 8
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group }}"
+    home: "{{ home }}"
+    comment: "{{ comment }}"
+    shell: "{{ shell }}"
+  when: not(uid == "") and not(group == "") and not(home == "") and not(comment == "") and not(shell == "/bin/bash")
+
+- name: Creating the user 9
+  user:
+    name: "{{ uname }}"
+    group: "{{ group }}"
+    home: "{{ home }}"
+    comment: "{{ comment }}"
+    shell: "{{ shell }}"
+  when: uid == "" and not(group == "") and not(home == "") and not(comment == "") and not(shell == "/bin/bash")
+
+- name: Creating the user 10
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    home: "{{ home }}"
+    comment: "{{ comment }}"
+    shell: "{{ shell }}"
+  when: not(uid == "") and group == "" and not(home == "") and not(comment == "") and not(shell == "/bin/bash")
+
+- name: Creating the user 11
+  user:
+    name: "{{ uname }}"
+    group: "{{ group }}"
+    home: "{{ home }}"
+    comment: "{{ comment }}"
+    shell: /bin/bash
+  when: uid == "" and not(group == "") and not(home == "") and not(comment == "") and shell == "/bin/bash"
+
+- name: Creating the user 12
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    home: "{{ home }}"
+    comment: "{{ comment }}"
+    shell: /bin/bash
+  when: not(uid == "") and group == "" and not(home == "") and not(comment == "") and shell == "/bin/bash"
+
+- name: Creating the user 13
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group }}"
+    home: /home/{{ uname }}
+    comment: "{{ comment }}"
+    shell: "{{ shell }}"
+  when: not(uid == "") and not(group == "") and home == "" and not(comment == "") and not(shell == "/bin/bash")
+
+- name: Creating the user 14
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group }}"
+    home: "{{ home }}"
+    shell: "{{ shell }}"
+  when: not(uid == "") and not(group == "") and not(home == "") and comment == "" and not(shell == "/bin/bash")
+
+- name: Creating the user 15
+  user:
+    name: "{{ uname }}"
+    uid: "{{ uid }}"
+    group: "{{ group}}"
+    home: /home/{{ uname }}
+    comment: "{{ comment }}"
+    shell: /bin/bash
+  when: not(uid == "") and not(group == "") and home == "" and not(comment == "") and shell == "/bin/bash"
+
+- name: show user
+  shell: grep "{{ uname }}" /etc/passwd
+  register: out
+  
+- debug: var=out.stdout_lines  
+  

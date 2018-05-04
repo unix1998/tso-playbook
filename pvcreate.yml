@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+  
+  vars_prompt:  
+    - name: "pvlist"
+      prompt: "Put the physical volumes separated by space(e.g. /dev/sdb1 or /dev/sdb)?"
+      private: no  
+      default: ""
+    - name: "force"
+      prompt: "Force(yes/no*)?"
+      private: no 
+      default: "no"
+    - name: "answer"
+      prompt: "Answer yes to all question(yes/no*)?"
+      private: no 
+      default: "no"      
+
+  roles:
+    - pvcreate

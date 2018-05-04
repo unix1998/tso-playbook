@@ -1,0 +1,13 @@
+---
+ - hosts: all 
+   become: true 
+   gather_facts: false
+
+   vars_prompt:
+
+     - name: "software"
+       prompt: "What is the software name to list (e.g. nginx)?"
+       private: no   
+ 
+   roles:
+     - yumlist   

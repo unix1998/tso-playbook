@@ -1,0 +1,28 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+  
+  vars_prompt:  
+    - name: "pvname"
+      prompt: "What is the physical volume(sdb or vdb[madatory])?"
+      private: no  
+      default: "sdb" 
+    - name: "type"
+      prompt: "Primary* or extended(p*/e/l[madatory])?"
+      private: no  
+      default: "p" 
+    - name: "partition"    
+      prompt: "What is the partition number(not required if logical)?"
+      private: no  
+    - name: "ptype"
+      prompt: "What is the partition type(not required if logical)?"
+      private: no  
+      default: "8e"       
+    - name: "disksize"
+      prompt: "What is the disksize(1G or 100M[madatory])?"
+      private: no
+      
+  roles:
+    - fdisk-create

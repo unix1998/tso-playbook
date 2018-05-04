@@ -1,0 +1,43 @@
+---
+
+- name: lvg 1
+  lvg:
+    vg: "{{ vgname }}"
+    pvs: "{{ pvlist }}"
+    state: present
+    pesize: "{{ pesize }}"
+  when: not(vgname == "") and not(pvlist == "") and not(pesize == "") and not(force == "") and pvoption == "" and vgoption == "" 
+  
+- name: lvg 2
+  lvg:
+    vg: "{{ vgname }}"
+    pvs: "{{ pvlist }}"
+    state: present
+    pesize: "{{ pesize }}"
+    pv_options: "{{ pvoption }}"
+  when: not(vgname == "") and not(pvlist == "") and not(pesize == "") and not(force == "") and not(pvoption == "") and vgoption == "" 
+
+- name: lvg 3
+  lvg:
+    vg: "{{ vgname }}"
+    pvs: "{{ pvlist }}"
+    state: present
+    pesize: "{{ pesize }}"
+    vg_options: "{{ vgoption }}"
+  when: not(vgname == "") and not(pvlist == "") and not(pesize == "") and not(force == "") and pvoption == "" and not(vgoption == "") 
+
+- name: lvg 4
+  lvg:
+    vg: "{{ vgname }}"
+    pvs: "{{ pvlist }}"
+    state: present
+    pesize: "{{ pesize }}"
+    pv_options: "{{ pvoption }}"
+    vg_options: "{{ vgoption }}"
+  when: not(vgname == "") and not(pvlist == "") and not(pesize == "") and not(force == "") and not(pvoption == "") and not(vgoption == "") 
+
+- name: vgscan 
+  shell: vgscan | grep {{ vgname }}
+  register: out
+
+- debug: var=out.stdout_lines  

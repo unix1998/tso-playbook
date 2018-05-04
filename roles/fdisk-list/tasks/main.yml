@@ -1,0 +1,17 @@
+---
+
+- name: fdisk list {{ pvname }}
+  shell: fdisk -l | grep /dev/{{ pvname }}
+  register: out
+  when: not (pvname == "")
+
+- debug: var=out.stdout_lines
+  when: not (pvname == "")
+
+- name: fdisk list
+  shell: fdisk -l
+  register: out
+  when: pvname == ""
+
+- debug: var=out.stdout_lines
+  when: pvname == ""

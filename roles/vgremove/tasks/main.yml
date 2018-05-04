@@ -1,0 +1,22 @@
+---
+
+- name: VG absent
+  lvg:
+    vg: "{{ vgname }}"
+    force: no
+    state: absent
+  when: not(vgname == "") and force == "no"
+
+- name: VG absent force
+  lvg:
+    vg: "{{ vgname }}"
+    foce: yes
+    state: absent
+  when: not(vgname == "") and force == "yes"
+
+
+- name: vgscan 
+  shell: vgscan
+  register: out
+
+- debug: var=out.stdout_lines  

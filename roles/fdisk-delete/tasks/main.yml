@@ -1,0 +1,11 @@
+---
+
+- name: Delete the partition
+  shell: (echo d; echo {{ partition }}; echo w) | fdisk /dev/{{ pvname }}
+  ignore_errors: true
+
+- name: pv list
+  shell: fdisk -l | grep /dev/{{ pvname }}
+  register: out
+
+- debug: var=out.stdout_lines

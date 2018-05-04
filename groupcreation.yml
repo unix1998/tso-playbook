@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  
+  vars_prompt:  
+    - name: "gname"
+      prompt: "What is the group name to add?"
+      private: no
+    - name: "groupid"
+      prompt: "What is the group id to add?"
+      private: no
+    
+  roles:
+    - groupcreation

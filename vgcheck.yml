@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(mandatory) to check?"
+      private: no  
+  
+  roles:
+    - vgcheck

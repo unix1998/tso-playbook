@@ -1,0 +1,27 @@
+---
+
+- name: create fs
+  mount:
+    path: "{{ fsname }}"
+    src: "{{ src }}"
+    fstype: "{{ fst }}"
+    state: "{{ state }}"
+  when: option == ""
+
+- name: create fs option
+  mount:
+    path: "{{ fsname }}"
+    src: "{{ src }}"
+    fstype: "{{ fst }}"
+    state: "{{ state }}"  
+    opts:  "{{ option }}"
+  when: not(option == "")  
+
+- name: df -h {{ fsname }}
+  shell: df -h {{ fsname }}
+  register: out
+  when: state == "mounted" or state == "present"
+  
+- debug: var=out.stdout_lines 
+  when: state == "mounted" or state == "present"
+    

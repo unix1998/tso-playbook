@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+  
+  vars_prompt:  
+    - name: "pvname"
+      prompt: "What is the physical volume(sdb or vdb)?"
+      private: no  
+      default: "sdb" 
+    - name: "partition"
+      prompt: "What is the partition number to change type?"
+      private: no  
+    - name: "ptype"
+      prompt: "What is the partition type (83 or 8e* or other)?"
+      private: no  
+      default: "8e" 
+            
+  roles:
+    - fdisk-change

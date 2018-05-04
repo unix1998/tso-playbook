@@ -1,0 +1,17 @@
+---
+
+- name: df -hT 
+  shell: df -hT 
+  register: out
+  when: fsname == ""
+  
+- debug: var=out.stdout_lines 
+  when: fsname == ""
+
+- name: df -hT w/ param
+  shell: df -hT {{ fsname }}
+  register: out
+  when: not(fsname == "")
+  
+- debug: var=out.stdout_lines 
+  when: not(fsname == "")

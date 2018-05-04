@@ -1,0 +1,38 @@
+---
+
+- name: vgdisplay {{ vgname }}
+  shell: vgdisplay {{ vgname }}
+  ignore_errors: yes
+  register: result1
+
+#- debug: var=result1 
+  
+- name: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  shell: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  ignore_errors: yes
+  register: result2
+
+#- debug: var=result2 
+
+- block:
+    - name: Check if vgname or lvname have errors
+      debug:
+        msg: "vgname not exist or vgname exist and lvname not exist, nothing to do"
+    - meta: end_play
+  when: result1.failed or result2.failed
+
+- name: create fs
+  filesystem:
+    fstype: "{{ fst }}"
+    dev: /dev/{{ vgname }}/{{ lvname }}
+    force: "{{ force }}"
+  when: option == ""
+
+- name: create fs option
+  filesystem:
+    fstype: "{{ fst }}"
+    dev: /dev/{{ vgname }}/{{ lvname }}
+    force: "{{ force }}"
+    opts:  "{{ option }}"
+  when: not(option == "")  
+  

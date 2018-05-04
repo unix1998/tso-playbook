@@ -1,0 +1,34 @@
+---
+
+- name: copy file
+  copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+  register: out
+  when: ohner == "" and porse == ""
+
+- debug: var=out
+  when: ohner == "" and porse == ""
+
+- name: copy file
+  copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+    owner: "{{ ohner }}"
+  register: out
+  when: not(ohner == "") and porse == ""
+
+- debug: var=out
+  when: not(ohner == "") and porse == ""
+
+- name: copy file
+  copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+    owner: "{{ ohner }}"
+    force: "{{ porse }}"
+  register: out
+  when: not(ohner == "") and not(porse == "")
+
+- debug: var=out
+  when: not(ohner == "") and not(porse == "")

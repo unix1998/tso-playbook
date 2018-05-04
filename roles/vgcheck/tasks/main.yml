@@ -1,0 +1,25 @@
+---
+
+- name: vgdisplay {{ vgname }}
+  shell: vgdisplay {{ vgname }}
+  ignore_errors: yes
+  register: result1
+
+#- debug: var=result1 
+
+- block:
+    - name: Check if vgname exist
+      debug:
+        msg: "***Error*** vgname {{ vgname }} not exist! Nothing to do."
+    - meta: end_play
+  when: result1.failed or vgname == ""
+
+- name: vgck {{ vgname }} 
+  shell: vgck {{ vgname }}
+  register: out
+
+- debug: var=out.stdout_lines 
+
+- debug:
+    msg: "{{ vgname }} got no error!"
+  when: out.stderr == ""

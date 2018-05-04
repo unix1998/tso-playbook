@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "pvlist"
+      prompt: "Put the physical volumes separated by space(/dev/sdb1 /dev/sdb2 or enter)?"
+      private: no  
+    - name: "option"
+      prompt: "Put the options(e.g. -m or enter)?"
+      private: no    
+
+  roles:
+    - pvdisplay

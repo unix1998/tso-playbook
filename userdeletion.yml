@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  
+  vars_prompt:
+
+    - name: "uname"
+      prompt: "What is the username to delete?"
+      private: no  
+      
+  roles:
+    - userdeletion

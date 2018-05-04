@@ -1,0 +1,18 @@
+---
+
+- name: lvdisplay 
+  shell: lvdisplay
+  register: out
+  when: pvlist ==""
+
+- debug: var=out.stdout_lines  
+  when: pvlist ==""
+
+- name: lvdisplay {{ pvlist }}
+  shell: lvdisplay {{ pvlist }}
+  ignore_errors: true
+  register: out
+  when: not(pvlist =="")
+
+- debug: var=out.stdout_lines  
+  when: not(pvlist =="")

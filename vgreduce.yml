@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname to reduce(mandatory)?"
+      private: no  
+    - name: "missing"
+      prompt: "Force remove missing physical volume(yes/no*)?"
+      private: no         
+      default: "no"
+    - name: "pvlist"
+      prompt: "Put the physical volume to remove(e.g. /dev/sdb1[mandatory if previous is no])?"
+      private: no     
+      
+  roles:
+    - vgreduce

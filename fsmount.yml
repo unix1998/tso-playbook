@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false       
+
+  vars_prompt:  
+    - name: "src"
+      prompt: "What is the device path(e.g. /dev/vg/lv or /dev/sr0)?"
+      private: no        
+    - name: "fst"
+      prompt: "What is the fstype(xfs/ext4*)?"
+      private: no  
+      default: "ext4"
+    - name: "fsname"
+      prompt: "Filesystem name(e.g. /vol1 or /vol1/stor1)?"
+      private: no  
+    - name: "state"
+      prompt: "State (absent/present/unmounted/mounted*)?"
+      private: no  
+      default: "mounted"         
+    - name: "option"
+      prompt: "What is the option(or enter)?" 
+      private: no  
+
+  roles:
+    - fsmount

@@ -1,0 +1,33 @@
+---
+
+- name: pvcreate
+  shell: pvcreate {{ pvlist }}
+  register: out
+  when: force == "no" and answer == "no"
+
+- debug: var=out.stdout_lines  
+  when: force == "no" and answer == "no"
+
+- name: pvcreate
+  shell: pvcreate -y {{ pvlist }}
+  register: out
+  when: force == "no" and answer == "yes"
+
+- debug: var=out.stdout_lines  
+  when: force == "no" and answer == "yes"
+
+- name: pvcreate force
+  shell: pvcreate -f {{ pvlist }} 
+  register: out
+  when: force == "yes" and answer == "no"
+
+- debug: var=out.stdout_lines  
+  when: force == "yes" and answer == "no"
+
+- name: pvcreate force
+  shell: pvcreate -f -y {{ pvlist }} 
+  register: out
+  when: force == "yes" and answer == "yes"
+
+- debug: var=out.stdout_lines  
+  when: force == "yes" and answer == "yes"  

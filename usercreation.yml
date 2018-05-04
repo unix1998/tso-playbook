@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+  
+  vars_prompt:  
+    - name: "uname"
+      prompt: "What is the username to add(mandatory)?"
+      private: no
+    - name: "uid"
+      prompt: "What is the userID to add(or enter)?"
+      private: no  
+    - name: "group"
+      prompt: "What is the primary group name to add(e.g. appgrp1 or enter)?"
+      private: no  
+    - name: "home"
+      prompt: "What is the home folder(or enter=/home/xxxx)?"
+      private: no  
+    - name: "comment"
+      prompt: "Comment or Description (or enter)?"
+      private: no  
+    - name: "shell"
+      prompt: "Shell (e.g. /bin/bash/ or enter)?"
+      private: no 
+      default: "/bin/bash" 
+      
+  
+  roles:
+    - usercreation

@@ -1,0 +1,7 @@
+---
+
+- name: vgs
+  shell: vgs
+  register: out
+
+- debug: var=out.stdout_lines  

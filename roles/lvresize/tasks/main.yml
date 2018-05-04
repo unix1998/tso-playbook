@@ -1,0 +1,75 @@
+---
+
+- name: vgdisplay {{ vgname }}
+  shell: vgdisplay {{ vgname }}
+  ignore_errors: yes
+  register: result1
+
+#- debug: var=result1 
+  
+- name: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  shell: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  ignore_errors: yes
+  register: result2
+
+#- debug: var=result2 
+
+- block:
+    - name: Check if vgname or lvname have errors
+      debug:
+        msg: "vgname not exist or vgname exist and lvname exist, nothing to do"
+    - meta: end_play
+  when: result1.failed or result2.failed
+
+- name: lvresize w/o option
+  lvol:
+    vg: "{{ vgname }}"
+    lv: "{{ lvname }}"
+    size: "{{ size }}"
+    force: "{{ force }}"
+  when: option == ""  and resizefs == "" and shrink == ""
+
+- name: lvresize w/o option w/ resizefs
+  lvol:
+    vg: "{{ vgname }}"
+    lv: "{{ lvname }}"
+    size: "{{ size }}"
+    force: "{{ force }}"
+    resizefs: "{{ resizefs }}"
+  when: option == ""  and not(resizefs == "") and shrink == ""
+
+- name: lvresize w option w/ resizefs
+  lvol:
+    vg: "{{ vgname }}"
+    lv: "{{ lvname }}"
+    size: "{{ size }}"
+    force: "{{ force }}"
+    resizefs: "{{ resizefs }}"
+    opts:  "{{ option }}"
+  when: not(option == "")  and not(resizefs == "") and shrink == ""
+
+- name: lvresize w/o option w/ shrink
+  lvol:
+    vg: "{{ vgname }}"
+    lv: "{{ lvname }}"
+    size: "{{ size }}"
+    force: "{{ force }}"
+    shrink: "{{ shrink }}"
+  when: option == ""  and resizefs == "" and not(shrink == "")
+
+- name: lvresize w/ option w/ shrink
+  lvol:
+    vg: "{{ vgname }}"
+    lv: "{{ lvname }}"
+    size: "{{ size }}"
+    force: "{{ force }}"
+    shrink: "{{ shrink }}"
+    opts:  "{{ option }}"
+  when: not(option == "")  and resizefs == "" and not(shrink == "")
+
+- name: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  shell: lvdisplay /dev/{{ vgname }}/{{ lvname }}
+  register: out
+  
+- debug: var=out.stdout_lines 
+  

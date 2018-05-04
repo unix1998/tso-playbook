@@ -1,0 +1,53 @@
+---
+
+- name: chown 1
+  file: 
+    path: "{{ path }}"
+    owner: "{{ owner }}"
+  when: not(owner == "") and group == "" and mode == "" and recurse == "no"
+
+- name: chown 2
+  file: 
+    path: "{{ path }}"
+    group: "{{ group }}"
+  when: owner == "" and not(group == "") and mode == "" and recurse == "no"
+
+- name: chown 3
+  file: 
+    path: "{{ path }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+  when: not(owner == "") and not(group == "") and mode == "" and recurse == "no"
+
+- name: chown 4
+  file: 
+    path: "{{ path }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: "{{ mode }}"
+  when: not(owner == "") and not(group == "") and not(mode == "") and recurse == "no"    
+
+- name: chown 5
+  file: 
+    path: "{{ path }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    recurse: "{{ recurse }}"
+    force: true
+    state: directory
+  when: not(owner == "") and not(group == "") and mode == "" and recurse == "yes"
+
+- name: chown 6
+  file: 
+    path: "{{ path }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: "{{ mode }}"
+    recurse: "{{ recurse }}"
+  when: not(owner == "") and not(group == "") and not(mode == "") and recurse == "yes"             
+
+- name: Check FS
+  shell: ls -lad {{ path }}
+  register: out
+  
+- debug: var=out.stdout_lines 

@@ -1,0 +1,17 @@
+---
+
+- name: vgdisplay 
+  shell: vgdisplay
+  register: out
+  when: vgname == ""
+
+- debug: var=out.stdout_lines  
+  when: vgname == ""
+
+- name: vgdisplay {{ vgname }}
+  shell: vgdisplay {{ vgname }}
+  register: out
+  when: not(vgname == "")
+
+- debug: var=out.stdout_lines  
+  when: not(vgname == "")

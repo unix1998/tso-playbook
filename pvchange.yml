@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "pvlist"
+      prompt: "Put the physical volumes separated by space(/dev/sdb1 /dev/sdb2)?"
+      private: no    
+    - name: "allocate"
+      prompt: "Allocate=y or De-allocate=n?"
+      private: no  
+      default: "y"
+
+  roles:
+    - pvchange

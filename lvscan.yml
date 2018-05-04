@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:     
+    - name: "lvs"
+      prompt: "lvscan* or lvs?"
+      private: no     
+      default: "lvscan"       
+         
+  roles:
+    - lvscan

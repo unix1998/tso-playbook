@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(mandatory)?"
+      private: no  
+    - name: "pvlist"
+      prompt: "Put the physical volumes(e.g. /dev/sdb1[mandatory])?"
+      private: no     
+      default: ""       
+       
+  roles:
+    - vgextend

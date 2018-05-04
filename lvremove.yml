@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(mandatory)?"
+      private: no  
+    - name: "lvname"
+      prompt: "What is the lvname(mandatory)?"
+      private: no  
+       
+  roles:
+    - lvremove

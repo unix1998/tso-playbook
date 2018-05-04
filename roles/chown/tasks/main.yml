@@ -1,0 +1,39 @@
+---
+
+- name: chown 1
+  shell: chown {{ owner }} {{ path }}
+  when: not(owner == "") and group == "" and option == "" and recurse == "no"
+
+- name: chown 2
+  shell: chown :{{ group }} {{ path }}
+  when: owner == "" and not(group == "") and option == "" and recurse == "no"
+
+- name: chown 3
+  shell: chown {{ owner }}:{{ group }} {{ path }}
+  when: not(owner == "") and not(group == "") and option == "" and recurse == "no"
+
+- name: chown 4
+  shell: chown {{ option }} {{ owner }}:{{ group }} {{ path }}
+  when: not(owner == "") and not(group == "") and not(option == "") and recurse == "no"    
+
+- name: chown 5
+  shell: chown -R {{ owner }}:{{ group }} {{ path }}
+  when: not(owner == "") and not(group == "") and option == "" and recurse == "yes"
+
+- name: chown 6
+  shell: chown -R {{ option }} {{ owner }}:{{ group }} {{ path }}
+  when: not(owner == "") and not(group == "") and not(option == "") and recurse == "yes"             
+
+- name: chown 7
+  shell: chown -R {{ option }} {{ owner }} {{ path }}
+  when: not(owner == "") and group == "" and not(option == "") and recurse == "yes"             
+
+- name: chown 8
+  shell: chown -R {{ option }} :{{ group }} {{ path }}
+  when: owner == "" and not(group == "") and not(option == "") and recurse == "yes"             
+
+- name: Check FS
+  shell: ls -lad {{ path }}
+  register: out
+  
+- debug: var=out.stdout_lines 

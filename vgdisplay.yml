@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+
+  vars_prompt:  
+    - name: "vgname"
+      prompt: "What is the vgname(or enter)?"
+      private: no  
+      default: ""
+
+  roles:
+    - vgdisplay

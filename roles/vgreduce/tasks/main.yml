@@ -1,0 +1,15 @@
+---
+
+- name: vgreduce {{ vgname }} {{ pvlist }}
+  shell: vgreduce {{ vgname }} {{ pvlist }}
+  when: missing == ""
+
+- name: vgreduce --removemissing --force {{ vgname }} {{ pvlist }}
+  shell: vgreduce --removemissing --force {{ vgname }} {{ pvlist }}
+  when: not(missing == "")
+
+- name: pvscan 
+  shell: pvscan
+  register: out
+
+- debug: var=out.stdout_lines  
