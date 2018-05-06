@@ -3,11 +3,11 @@
   become: true
   gather_facts: false
 
-  vars_prompt:
+  #vars_prompt:
 
-    - name: "software"
-      prompt: "What is the software name to install (e.g. nginx)?"
-      private: no
+    #- name: "software"
+    #  prompt: "What is the software name to install (e.g. nginx)?"
+    #  private: no
   
   roles:
     - yuminstall
