@@ -51,6 +51,6 @@ people:
   - name: Tim
     fav_colour: Orange
 
-vgname:
+vgname: ""
 
 #ansible_become_pass: thuyAkac4S6uhAsPuSw2
