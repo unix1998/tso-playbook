@@ -55,5 +55,4 @@ people:
     fav_colour: Orange
 
 vgname: ""
-
 #ansible_become_pass: 
