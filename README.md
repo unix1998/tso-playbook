@@ -1,5 +1,10 @@
 # tso-playbook
 
+#clone first 
+git clone https://github.com/venerari/menu1.git
+cd menu1/
+git clone this
+
 This is multiple plabook roles for creating user, deleting user, installing software, deleting software, list software, LVM, etc.
 
 
